@@ -18,6 +18,7 @@ function App() {
 
   return (
     <div>
+      <button onClick={onClose}>Close</button>
       <Routes>
         <Route index element={<ProductList />} />
         <Route path={'form'} element={<Form />} />
