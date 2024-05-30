@@ -79,6 +79,7 @@ const Form = () => {
                 <option value={'legal'}>Колибровка аккаунта</option>
                 <option value={'legal'}>Понижения аккаунта</option>
             </select>
+            <Button>Отправить</Button>
         </div>
     );
 };
