@@ -17,7 +17,7 @@ const ProductItem = ({product, className, onAdd}) => {
                 <span>{product.price.toLocaleString('ru')}<b>₽</b></span>
             </div> */}
             <Button className={'add-btn'} onClick={onAddHandler}>
-                <span>{product.price.toLocaleString('ru')}<b>₽</b></span>
+                <span>{product.price.toLocaleString('ru')}<b> ₽</b></span>
             </Button>
         </div>
     );
