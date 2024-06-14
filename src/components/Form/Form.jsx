@@ -4,19 +4,21 @@ import {useTelegram} from "../../hooks/useTelegram";
 import { Button } from '../Button/Button';
 
 const Form = () => {
-    const [country, setCountry] = useState('');
-    const [street, setStreet] = useState('');
+    const [email, setEmail] = useState('');
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+    const [comment, setComment] = useState('');
     const [subject, setSubject] = useState('physical');
     const {tg} = useTelegram();
 
     const onSendData = useCallback(() => {
         const data = {
-            country,
-            street,
+            country: email,
+            street: login,
             subject
         }
         tg.sendData(JSON.stringify(data));
-    }, [country, street, subject])
+    }, [email, login, subject])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
@@ -32,19 +34,27 @@ const Form = () => {
     }, [])
 
     useEffect(() => {
-        if(!street || !country) {
+        if(!login || !email) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    }, [country, street])
+    }, [email, login])
 
-    const onChangeCountry = (e) => {
-        setCountry(e.target.value)
+    const onChangeEmail = (e) => {
+        setEmail(e.target.value)
     }
 
-    const onChangeStreet = (e) => {
-        setStreet(e.target.value)
+    const onChangeLogin = (e) => {
+        setLogin(e.target.value)
+    }
+
+    const onChangePassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const onChangeComment = (e) => {
+        setComment(e.target.value)
     }
 
     const onChangeSubject = (e) => {
@@ -58,29 +68,30 @@ const Form = () => {
                 className={'input'}
                 type="text"
                 placeholder={'Почта'}
-                value={country}
-                onChange={onChangeCountry}
+                value={email}
+                onChange={onChangeEmail}
             />
             <input
                 className={'input'}
                 type="text"
                 placeholder={'Login'}
-                value={country}
-                onChange={onChangeCountry}
+                value={login}
+                onChange={onChangeLogin}
             />
             <input
                 className={'input'}
                 type="text"
                 placeholder={'Пароль'}
-                value={street}
-                onChange={onChangeStreet}
+                value={password}
+                onChange={onChangePassword}
             />
-            <select value={subject} onChange={onChangeSubject} className={'select'}>
-                <option value={'physical'}>Буст аккаунта</option>
-                <option value={'legal'}>Колибровка аккаунта</option>
-                <option value={'legal'}>Понижения аккаунта</option>
-            </select>
-            <Button>Отправить</Button>
+            <input 
+                className={'input'}
+                type="text"
+                placeholder={'Комментарий'}
+                value={comment}
+                onChange={onChangeComment}
+            />
         </div>
     );
 };
