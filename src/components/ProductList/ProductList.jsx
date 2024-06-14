@@ -25,7 +25,7 @@ const getTotalPrice = (items = []) => {
 export const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const {tg, queryId} = useTelegram();
-
+    const [isSend, setIsSend] = useState(false);
     const onSendData = useCallback(() => {
 
         const data = {
@@ -33,14 +33,14 @@ export const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         }
-        return <Form/>
-        fetch('http://85.119.146.179:8000/web-data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
+        setIsSend(true);
+        // fetch('http://85.119.146.179:8000/web-data', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(data)
+        // })
     }, [addedItems])
 
     useEffect(() => {
@@ -73,14 +73,17 @@ export const ProductList = () => {
     }
 
     return (
-        <div className={'list'}>
-            {products.map(item => (
-                <ProductItem
-                    product={item}
-                    onAdd={onAdd}
-                    className={'item'}
-                />
-            ))}
-        </div>
+        <>
+            <div className={'list'}>
+                {products.map(item => (
+                    <ProductItem
+                        product={item}
+                        onAdd={onAdd}
+                        className={'item'}
+                    />
+                ))}
+            </div>
+            {isSend && <Form/>}
+        </>
     );
 };
