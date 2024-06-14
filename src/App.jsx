@@ -7,7 +7,7 @@ import {Header} from "./components/Header/Header";
 import { useTelegram } from './hooks/useTelegram';
 
 function App() {
-  const {tg, onToggleButton} = useTelegram();
+  const {tg} = useTelegram();
 
   useEffect(() => {
       tg.ready();
@@ -15,9 +15,12 @@ function App() {
 
   return (
     <div className='App'>
-      <Header />
-      <Form/>
-      <button onClick={onToggleButton}>toggle</button>
+      {/* <Header /> */}
+      <ProductList/>
+      {/* <Routes>
+        <Route index element={<ProductList />}/>
+        <Route path={'/from'} element={<Form/>}/>
+      </Routes> */}
     </div>
   )
 }
