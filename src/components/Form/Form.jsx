@@ -1,23 +1,23 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import './Form.css';
 import {useTelegram} from "../../hooks/useTelegram";
-import { Button } from '../Button/Button';
 
 const Form = () => {
     const [email, setEmail] = useState('');
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [comment, setComment] = useState('');
-    const [subject, setSubject] = useState('physical');
     const {tg} = useTelegram();
 
     const onSendData = useCallback(() => {
         const data = {
-            country: email,
-            street: login
+            email,
+            login,
+            password,
+            comment
         }
         tg.sendData(JSON.stringify(data));
-    }, [email, login, subject])
+    }, [email, login, password, comment])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
@@ -33,12 +33,12 @@ const Form = () => {
     }, [])
 
     useEffect(() => {
-        if(!login || !email) {
+        if(!login || !email || !password) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
         }
-    }, [email, login])
+    }, [email, login, password])
 
     const onChangeEmail = (e) => {
         setEmail(e.target.value)
@@ -54,10 +54,6 @@ const Form = () => {
 
     const onChangeComment = (e) => {
         setComment(e.target.value)
-    }
-
-    const onChangeSubject = (e) => {
-        setSubject(e.target.value)
     }
 
     return (
@@ -79,7 +75,7 @@ const Form = () => {
             />
             <input
                 className={'input'}
-                type="text"
+                type="password"
                 placeholder={'Пароль'}
                 value={password}
                 onChange={onChangePassword}
