@@ -74,7 +74,7 @@ export const ProductList = () => {
 
     return (
         <>
-            <div className={'list'}>
+            {!isSend && <div className={'list'}>
                 {products.map(item => (
                     <ProductItem
                         product={item}
@@ -82,7 +82,7 @@ export const ProductList = () => {
                         className={'item'}
                     />
                 ))}
-            </div>
+            </div>}
             {isSend && <Form/>}
         </>
     );
