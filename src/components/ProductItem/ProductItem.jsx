@@ -13,11 +13,11 @@ const ProductItem = ({product, className, onAdd}) => {
             <div className={'img'}></div>
             <div className={'title'}>{product.title}</div>
             {/* <div className={'description'}>{product.description}</div> */}
-            <div className={'price'}>
+            {/* <div className={'price'}>
                 <span>{product.price.toLocaleString('ru')}<b>₽</b></span>
-            </div>
+            </div> */}
             <Button className={'add-btn'} onClick={onAddHandler}>
-                Добавить
+                <span>{product.price.toLocaleString('ru')}<b>₽</b></span>
             </Button>
         </div>
     );
