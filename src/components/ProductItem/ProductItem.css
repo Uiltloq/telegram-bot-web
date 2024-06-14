@@ -7,6 +7,9 @@
     justify-content: flex-end;
 }
 
+.title{
+    margin-top:10px;
+}
 
 .img {
     border-radius: 10px;
